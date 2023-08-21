@@ -36,6 +36,16 @@ public class EmpresaServicio {
 		return empresas;
 	}
 
+	public EmpresaTO buscarId(Integer id) {
+		Empresa empr = this.iEmpresaRepositorio.findById(id).orElse(null);
+		EmpresaTO empr1 = this.convertir(empr);
+		return empr1;
+	}
+	
+	public void eliminar(Integer id) {
+		this.iEmpresaRepositorio.deleteById(id);
+	}
+	
 	private EmpresaTO convertir(Empresa empresa) {
 		EmpresaTO e = new EmpresaTO();
 		e.setCreadoPor(empresa.getCreadoPor());

@@ -35,7 +35,7 @@ public class DepartamentoController {
 	}
 	
 	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Optional<Departamento> buscarPorId(@PathVariable Integer id) {
+	public Departamento buscarPorId(@PathVariable Integer id) {
 		return this.departamentoServicio.buscarPorId(id);
 	}
 	
@@ -45,4 +45,8 @@ public class DepartamentoController {
 		return this.departamentoServicio.insertarActualizar(departamento);
 	}
 	
+	/*@GetMapping
+	public DepartamentoTO buscarId(@PathVariable Integer id) {
+		
+	}*/
 }

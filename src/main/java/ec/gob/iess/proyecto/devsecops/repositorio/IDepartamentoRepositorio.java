@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import ec.gob.iess.proyecto.devsecops.entidad.Departamento;
+import ec.gob.iess.proyecto.devsecops.entidad.Empleado;
 import jakarta.transaction.Transactional;
 
 @Repository
@@ -19,4 +20,10 @@ public interface IDepartamentoRepositorio extends JpaRepository<Departamento, In
 
 	@Query("Select d from Departamento d where d.empresa.idEmpr = :id")
 	List<Departamento> findByEmpresaId(@Param("id") Integer id);
+	
+	@Query("Select de.empleado from DepartamentosEmpleados de where de.departamento = :departamento")
+	List<Empleado> findEmpleadosByDepartamentos(@Param("departamento") Departamento departamento);
 }
+
+
+

@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:15.3
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+    ports:
+      - 5433:5432
+    volumes:
+      - db:/var/lib/postgresql/data
+
+  pgadmin4:
+    container_name: pgadmin4
+    image: dpage/pgadmin4
+    restart: always
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    ports:
+      - 5050:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=ericksebastianchavezgarcia@gmail.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    volumes:
+      - pg:/var/lib/pgadmin
+
+volumes:
+  db:
+    driver: local
+  pg:
+    driver: local
