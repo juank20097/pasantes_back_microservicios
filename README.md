@@ -5,7 +5,7 @@
 ## **PGADMIN**
 - Abrir el archivo docker-compose desde un terminal cmd o linux (Asegurarse de tener instalado docker)
 - Editar el archivo docker-compose y en la variable <br>
-  environment:
+  environment:<br>
       - PGADMIN_DEFAULT_EMAIL= "Ingresar su correo"
       - PGADMIN_DEFAULT_PASSWORD= admin <br>
 - Abrir Pgadmin desde el navegador (http://localhost:5050/) e ingresar a la interfaz
