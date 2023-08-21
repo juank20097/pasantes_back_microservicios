@@ -20,7 +20,7 @@
             Host name/address: postgres <br>
             Puerto: 5432 <br>
             Username: admin <br>
-            Password: admin <br>
+            Password: admin 
   - Una vez creado el servidor debemos agregar una base de datos <br>
             Crear Base de datos con el nombre: **devsecops** 
   - Dentro de la base de datos crear un squema con el nombre que se encuentra en la capa entidades del proyecto
