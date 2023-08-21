@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ec.gob.iess.proyecto.devsecops.dto.DepartamentoTO;
+import ec.gob.iess.proyecto.devsecops.dto.DepartamentoTO2;
 import ec.gob.iess.proyecto.devsecops.entidad.Departamento;
 import ec.gob.iess.proyecto.devsecops.entidad.Empresa;
 import ec.gob.iess.proyecto.devsecops.repositorio.IDepartamentoRepositorio;
@@ -22,6 +23,11 @@ public class DepartamentoServicio {
 	@Autowired
 	private IEmpresaRepositorio iEmpresaRepositorio;
 
+	/*
+	 * Método que inserta y actualiza
+	 * Busca por id y si existe, actualiza
+	 * Si no, lo inserta
+	 */
 	public Departamento insertarActualizar(DepartamentoTO departamentoTO) {
 		Departamento departamento = null;
 		Empresa empresa = this.iEmpresaRepositorio.findById(departamentoTO.getIdEmpr()).orElse(null);
@@ -63,8 +69,8 @@ public class DepartamentoServicio {
 		return departamentos;
 	}
 	
-	public Optional<Departamento> buscarPorId(Integer id) {
-		return this.iDepartamentoRepositorio.findById(id);
+	public Departamento buscarPorId(Integer id) {
+		return this.iDepartamentoRepositorio.findById(id).orElse(null);
 	}
 	
 	public List<DepartamentoTO> buscarActivos() {
@@ -74,6 +80,10 @@ public class DepartamentoServicio {
 		return departamentos;
 	}
 	
+	
+	/*public List<DepartamentoTO2> buscarTodos() {
+		List<Departamento> departamentosTodos
+	}*/
 	
 	private DepartamentoTO convertir(Departamento departamento) {
 		DepartamentoTO d = new DepartamentoTO();

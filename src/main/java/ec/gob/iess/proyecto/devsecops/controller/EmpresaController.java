@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,9 +62,17 @@ public class EmpresaController {
 	 * @param id the id
 	 * @return the optional
 	 */
-	@GetMapping(path = "/{id}")
+	/*@GetMapping(path = "/{id}")
 	public Empresa buscarPorId(@PathVariable Integer id) {
 		return this.empresaServicio.buscarPorId(id);
+	}*/
+	
+	@GetMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public EmpresaTO buscarPorId(@PathVariable Integer id) {
+		EmpresaTO e = this.empresaServicio.buscarId(id);
+		Link miLink = linkTo(methodOn(EmpresaController.class).buscarPorIdEmpr(e.getIdEmpr())).withRel("departamentos");
+		e.add(miLink);
+		return e;
 	}
 	
 	/**
@@ -101,5 +110,13 @@ public class EmpresaController {
 	@GetMapping(path = "/{id}/departamentos", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<DepartamentoTO> buscarPorIdEmpr(@PathVariable Integer id){
 		return new ResponseEntity(this.departamentoServicio.buscarDepartamentos(id), null, 217);
+	}
+	
+	
+	@DeleteMapping(path = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public String eliminar(@PathVariable Integer id) {
+		String mensaje = "Se ha eliminado la empresa con id: " + id;
+		this.empresaServicio.eliminar(id);
+		return mensaje;
 	}
 }
